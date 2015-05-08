@@ -22,35 +22,40 @@ public class IntToEng {
     	String s = null;
     	int units = n % 10;
     	int ten = n / 10;
-    	int hand = n/100;
     	
-    	if(n>0){
-    		s=hundred(hand,ten,units);
+    	if(n/1000>0){
+    		s=thousand(n);
+    	}else if(n/100>0){
+    		s=hundred(n);
     	} else {
-    		if(ten==0)s=number[n];
-        	else if(ten==1) s=number1[n-10];
-        	else{
-        		if(units==0)s=number2[ten];
-        		else s=number2[ten] +" "+number[units];
-        	}
+    		s=tens(ten,units);
     	}
-    	
-    	/*if(ten==0)s=number[n];
-    	else if(ten==1) s=number1[n-10];
+    	return s;
+    }
+    static String hundred(int n){
+    	String s = null;
+    	int hund = n / 100;
+    	int tmp = n % 100;
+    	int ten = tmp / 10;
+    	int units = tmp % 10;
+    	if(ten==0&&units==0) s=number[hund]+" hundred";
+    	else if(ten==0) s=number[hund]+" hundred "+number[units];
+    	else if(ten==1) s=number[hund]+" hundred "+number1[units];
+    	else s=number[hund]+" hundred "+number2[ten]+" "+number[units];
+    	return s;	
+    }
+    static String thousand(int n){
+    	String s=null;
+    	return s;
+    }
+    static String tens(int ten,int units){
+    	String s=null;
+    	if(ten==0)s=number[units];
+    	else if(ten==1) s=number1[units];
     	else{
     		if(units==0)s=number2[ten];
     		else s=number2[ten] +" "+number[units];
-    	}*/
+    	}
     	return s;
     }
-    static String hundred(int hand,int ten,int units){
-    	String s = null;
-    	if(ten==0&&units==0) s=number[hand]+" hundred";
-    	else if(ten==0) s=number[hand]+" hundred"+number[units];
-    	else if(ten==1) s=number[hand]+" hundred"+number1[units];
-    	else s=number[hand]+" hundred"+number2[ten]+number[units];
-    	return s;
-    	
-    }
-    
 }

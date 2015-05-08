@@ -45,7 +45,23 @@ public class IntToEng {
     	return s;	
     }
     static String thousand(int n){
-    	String s=null;
+    	String s = null; 
+    	int temp = n % 100;
+    	int hund = temp /100;
+    	int ten = temp / 10;
+    	int units = n%1000;
+    	int tho = n / 1000;
+    	if(n%1000==0) s = number[tho]+" thousand";
+    	else if(n/10<100) s = number[tho]+" thousand "+tens(ten,units);
+    	else if(n%100==0) {
+    		int hun = hund%10;
+    		if(tho==1) s = number1[hund]+ " hundred";
+    		else s = number2[tho]+" hundred";
+    	}
+    	else{
+    		int hun = hund%10;
+    		s = tens(tho,hun)+ " hundred "+tens(ten,units);
+    	}
     	return s;
     }
     static String tens(int ten,int units){

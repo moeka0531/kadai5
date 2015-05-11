@@ -23,7 +23,9 @@ public class IntToEng {
     	int units = n % 10;
     	int ten = n / 10;
     	
-    	if(n/1000>0){
+    	if(n/10000>0){
+    		s="ten thousand";
+    	}else if(n/1000>0){
     		s=thousand(n);
     	}else if(n/100>0){
     		s=hundred(n);
@@ -46,21 +48,22 @@ public class IntToEng {
     }
     static String thousand(int n){
     	String s = null; 
-    	int temp = n % 100;
-    	int hund = temp /100;
-    	int ten = temp / 10;
-    	int units = n%1000;
+    	int a = n / 100;
+		int b = a / 10;
+		int c = a % 10;
+		int d = n % 100;
+		int e = d /10;
+		int f = d % 10;
     	int tho = n / 1000;
     	if(n%1000==0) s = number[tho]+" thousand";
-    	else if(n/10<100) s = number[tho]+" thousand "+tens(ten,units);
     	else if(n%100==0) {
-    		int hun = hund%10;
-    		if(tho==1) s = number1[hund]+ " hundred";
-    		else s = number2[tho]+" hundred";
+    		
+    		s=tens(b,c)+" hundred";
+    	}else if(c==0){
+    		s=number[tho]+" thousand "+tens(e,f);
     	}
     	else{
-    		int hun = hund%10;
-    		s = tens(tho,hun)+ " hundred "+tens(ten,units);
+    		s = tens(b,c)+ " hundred "+tens(e,f);
     	}
     	return s;
     }

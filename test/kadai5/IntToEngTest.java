@@ -167,5 +167,12 @@ public class IntToEngTest {
 		String actual = ite.translateEng(1981);
 		assertThat(actual,is(expected));
 		
+	}@Test
+	public void test10000() {
+		IntToEng ite = new IntToEng();
+		String expected = "ten thousand";
+		String actual = ite.translateEng(10000);
+		assertThat(actual,is(expected));
+		
 	}
 }
